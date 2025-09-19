@@ -12,12 +12,10 @@ class SemesterController extends Controller
 {
     public function index()
     {
-        // ambil hanya kolom yang diperlukan & eager load relasi
         $semester = Semester::with(['tahunAjar:id,tahun_ajar'])
             ->latest()
             ->paginate(8);
 
-        // kalau dipakai untuk dropdown/filter di view
         $tahunAjars = TahunAjar::orderByDesc('tahun_ajar')
             ->get(['id', 'tahun_ajar']);
 
@@ -26,7 +24,6 @@ class SemesterController extends Controller
             'ta'        => $tahunAjars,
         ]);
     }
-
 
     public function store(SemesterRequest $request)
     {
@@ -71,5 +68,35 @@ class SemesterController extends Controller
             toast('Gagal menghapus data', 'error')->timerProgressBar();
             return redirect()->back();
         }
+    }
+
+    public function aktif(Semester $semester)
+    {
+        if ($semester->is_active == 0) {
+
+            $semester->update(['is_active' => 1]);
+
+            \Log::info("berhasil mengaktifkan");
+            toast('berhasil mengaktifkan', 'success')->timerProgressBar();
+            return redirect()->back();
+        } else {
+            toast('Semester sudah aktif', 'error')->timerProgressBar();
+        }
+
+        return redirect()->back();
+    }
+
+    public function nonaktif(Semester $semester)
+    {
+        if ($semester->is_active == 1) {
+            $semester->update(['is_active' => 0]);
+
+            \Log::info("berhasil menonaktifkan");
+            toast('berhasil menonaktifkan', 'success')->timerProgressBar();
+            return redirect()->back();
+        } else {
+            toast('Semester sudah nonaktif', 'error')->timerProgressBar();
+        }
+        return redirect()->back();
     }
 }

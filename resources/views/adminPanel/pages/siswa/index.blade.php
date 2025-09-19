@@ -1,7 +1,7 @@
 @extends('layouts.adminPanel')
 
 @section('title')
-    Tahun Ajar
+    Siswa
 @endsection
 
 @section('content')
@@ -16,28 +16,30 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Tahun Ajar</th>
-                                <th>Tgl Mulai</th>
-                                <th>Tgl Selesai</th>
+                                <th>Nik</th>
+                                <th>Siswa</th>
+                                <th>Kelas</th>
+                                <th>Gender</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($tahunAjar as $item)
+                            @foreach ($siswa as $item)
                                 <tr>
-                                    <td>{{ $tahunAjar->firstItem() + $loop->index }}</td>
-                                    <td>{{ $item->tahun_ajar }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($item->start_date)) }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($item->end_date)) }}</td>
+                                    <td>{{ $siswa->firstItem() + $loop->index }}</td>
+                                    <td>{{ $item->nik }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->kelas->nama_kelas }}</td>
+                                    <td>{{ $item->jenis_kelamin }}</td>
                                     <td class="d-flex">
                                         <button class="btn btn-sm btn-success me-2" data-bs-toggle="modal"
                                             data-bs-target="#editKelasModal{{ $item->id }}"><i
                                                 class="fas fa-edit"></i>Edit</button>
 
                                         {{-- Edit Kelas Modal --}}
-                                        @include('adminPanel.pages.tahunAjar.edit')
+                                        @include('adminPanel.pages.siswa.edit')
 
-                                        <form action="{{ route('ta.destroy', $item->id) }}" method="POST">
+                                        <form action="{{ route('siswa.destroy', $item->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger"
@@ -50,7 +52,7 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                        {{ $tahunAjar->links() }}
+                        {{ $siswa->links() }}
                     </table>
                 </div>
             </div>
@@ -58,5 +60,5 @@
     </section>
 
     {{-- Include kelas modal --}}
-    @include('adminPanel.pages.tahunAjar.form')
+    @include('adminPanel.pages.siswa.form')
 @endsection
