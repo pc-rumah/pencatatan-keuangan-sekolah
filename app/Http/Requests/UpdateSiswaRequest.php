@@ -13,20 +13,21 @@ class UpdateSiswaRequest extends FormRequest
         return true;
     }
 
-    public function rules(Siswa $siswa): array
+    public function rules(): array
     {
+        $siswaId = $this->route('siswa')?->id ?? $this->siswa?->id;
         return [
             'nik' => [
                 'required',
                 'string',
                 'digits:16',
-                Rule::unique('siswas', 'nik')->ignore($siswa),
+                Rule::unique('siswas', 'nik')->ignore($siswaId),
             ],
             'nis' => [
                 'required',
                 'string',
                 'max:30',
-                Rule::unique('siswas', 'nis')->ignore($siswa),
+                Rule::unique('siswas', 'nis')->ignore($siswaId),
             ],
             'name' => ['required', 'string', 'max:100'],
             'kelas_id' => ['required', 'integer', 'exists:kelas,id'],

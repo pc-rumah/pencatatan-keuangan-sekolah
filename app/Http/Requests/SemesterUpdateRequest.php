@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SemesterUpdateRequest extends FormRequest
@@ -13,11 +14,16 @@ class SemesterUpdateRequest extends FormRequest
 
     public function rules(): array
     {
+        $semesterId = $this->route('semester')?->id ?? $this->semester?->id;
+        //Mengambil ID semester yang sedang diedit
+        // ?? artinya "atau" - coba ambil dari route, kalau tidak ada ambil dari semester
+
         return [
-            'tahun_ajar_id' => 'required|exists:tahun_ajars,id',
-            'name' => 'required|unique:semesters,name|string',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date',
+            'tahun_ajar_id' => ['required', 'exists:tahun_ajars,id'],
+            'name' => ['required', 'string', Rule::unique('semesters', 'name')->ignore($semesterId)],
+            //Rule::unique(...)->ignore($semesterId) = nama harus unik (tidak boleh sama), KECUALI semester yang sedang diedit ini (boleh nama sama dengan dirinya sendiri)
+            'start_date' => ['required', 'date'],
+            'end_date' => ['required', 'date', 'after:start_date'],
         ];
     }
 

@@ -52,14 +52,19 @@ class SiswaController extends Controller
 
     public function destroy(Siswa $siswa)
     {
-        $hapus = $siswa->delete();
+        try {
+            $hapus = $siswa->delete();
 
-        if ($hapus) {
-            \Log::info("Berhasil menghapus data", ['deleted_by' => auth()->user()->name]);
+            \Log::info("Berhasil menghapus data", [
+                'deleted_by' => auth()->user()->name
+            ]);
+
             toast('Berhasil menghapus data', 'success')->timerProgressBar();
             return redirect()->back();
-        } else {
-            \Log::error("Gagal menghapus data");
+        } catch (\Exception $e) {
+            \Log::error("Gagal menghapus kelas", [
+                'error' => $e->getMessage()
+            ]);
             toast('Gagal menghapus data', 'error')->timerProgressBar();
             return redirect()->back();
         }

@@ -21,7 +21,13 @@ class KelasController extends Controller
             $data = $request->validated();
             Kelas::create($data);
 
-            \Log::info("Berhasil menambah data kelas", ['data' => $data, 'created_by' => auth()->user()->name]);
+            // Lebih konsisten dengan format logging
+            \Log::info("Berhasil menambah data kelas", [
+                'data' => $data,
+                'user_id' => auth()->id(),
+                'user_name' => auth()->user()->name
+            ]);
+
             toast('Berhasil menambahkan data!', 'success')->timerProgressBar();
             return redirect()->back();
         } catch (\Exception $e) {
@@ -36,7 +42,13 @@ class KelasController extends Controller
         try {
             $validate = $request->validated();
             $kelas->update($validate);
-            \Log::info("berhasil mengupdate data", ['created_by' => auth()->user()->name]);
+
+            \Log::info("Berhasil mengupdate data", [
+                'kelas_id' => $kelas->id,
+                'data' => $validate,
+                'updated_by' => auth()->user()->name
+            ]);
+
             toast('Berhasil mengupdate data', 'success')->timerProgressBar();
             return redirect()->back();
         } catch (\Exception $e) {
@@ -48,15 +60,21 @@ class KelasController extends Controller
 
     public function destroy(Kelas $kelas)
     {
-        $hapus = $kelas->delete();
-
-        if ($hapus) {
-            \Log::info("berhasil menghapus data kelas", ['created_by' => auth()->user()->name]);
+        try {
+            $kelas->delete();
+            \Log::info("Berhasil menghapus data kelas", [
+                'kelas_id' => $kelas->id,
+                'user_name' => auth()->user()->name
+            ]);
             toast('Berhasil menghapus data', 'success')->timerProgressBar();
-            return redirect()->back();
-        } else {
-            toast('Gagal menghapus data', 'error');
-            return redirect()->back();
+        } catch (\Exception $e) {
+            \Log::error("Gagal menghapus data kelas", [
+                'kelas_id' => $kelas->id,
+                'error' => $e->getMessage()
+            ]);
+            toast('Gagal menghapus data', 'error')->timerProgressBar();
         }
+
+        return redirect()->back();
     }
 }
