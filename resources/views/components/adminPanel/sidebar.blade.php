@@ -53,7 +53,7 @@
                             <a href="{{ route('siswa.index') }}">Data Siswa</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="#">Jenis</a>
+                            <a href="{{ route('jenis.index') }}">Jenis</a>
                         </li>
                     </ul>
                 </li>
@@ -65,7 +65,7 @@
                     </a>
                     <ul class="submenu ">
                         <li class="submenu-item ">
-                            <a href="component-alert.html">Tagihan</a>
+                            <a href="{{ route('tagihan.index') }}">Tagihan</a>
                         </li>
                         <li class="submenu-item ">
                             <a href="component-badge.html">Pembayaran</a>

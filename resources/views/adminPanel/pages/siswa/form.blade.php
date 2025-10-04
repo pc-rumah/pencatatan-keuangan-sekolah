@@ -13,7 +13,7 @@
                         <label for="nik" class="col-form-label col-sm-2">NIK</label>
                         <div class="col-sm-10">
                             <input type="number" name="nik" id="nik" class="form-control"
-                                placeholder="Masukan nik" data-parsley-required="true"
+                                placeholder="Masukan nik" value="{{ old('nik') }}" data-parsley-required="true"
                                 data-parsley-required-message="Bidang ini wajib di isi!" required>
                         </div>
                     </div>
@@ -21,7 +21,7 @@
                         <label for="nis" class="col-form-label col-sm-2">NIS</label>
                         <div class="col-sm-10">
                             <input type="number" name="nis" id="nis" class="form-control"
-                                placeholder="Masukan nis" data-parsley-required="true"
+                                placeholder="Masukan nis" value="{{ old('nis') }}" data-parsley-required="true"
                                 data-parsley-required-message="Bidang ini wajib di isi!" required>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                         <label for="nama" class="col-form-label col-sm-2">NAMA</label>
                         <div class="col-sm-10">
                             <input type="text" name="name" id="nama" class="form-control"
-                                placeholder="Masukan nama" data-parsley-required="true"
+                                placeholder="Masukan nama" value="{{ old('name') }}" data-parsley-required="true"
                                 data-parsley-required-message="Bidang ini wajib di isi!" required>
                         </div>
                     </div>
@@ -49,8 +49,8 @@
                         <label for="tanggal_lahir" class="col-form-label col-sm-2">Tanggal Lahir</label>
                         <div class="col-sm-10">
                             <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control"
-                                data-parsley-required="true" data-parsley-required-message="Bidang ini wajib di isi!"
-                                required>
+                                value="{{ old('tanggal_lahir') }}" data-parsley-required="true"
+                                data-parsley-required-message="Bidang ini wajib di isi!" required>
                         </div>
                     </div>
                     <div class="form-group row">
