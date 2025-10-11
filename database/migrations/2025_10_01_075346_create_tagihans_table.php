@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('jenis_id')->constrained('jenis')->cascadeOnDelete();
             $table->foreignId('siswa_id')->constrained('siswas')->cascadeOnDelete();
+
+            $table->string('bukti_pembayaran')->nullable();
+            $table->enum('metode_pembayaran', ['tunai', 'transfer'])->nullable();
+            $table->enum('status', ['lunas', 'belum_lunas'])->default('belum_lunas');
             $table->timestamps();
         });
     }

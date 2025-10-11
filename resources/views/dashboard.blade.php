@@ -27,13 +27,13 @@
                 <section class="row">
                     <div class="col-12 col-lg-9">
 
-                        <x-adminPanel.stat />
+                        <x-adminPanel.stat :siswa="$siswa" :lunas="$lunas" :belumlunas="$belumlunas" :total="$total" />
 
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Profile Visit</h4>
+                                        <h4>Pendapatan Perbulan</h4>
                                     </div>
                                     <div class="card-body">
                                         <div id="chart-profile-visit"></div>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
 
-                    <x-adminPanel.userInfo :device="$device" :platform="$platform" :browser="$browser" />
+                    <x-adminPanel.userInfo :deviceinfo="$deviceinfo" />
 
                 </section>
             </div>

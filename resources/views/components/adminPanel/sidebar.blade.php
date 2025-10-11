@@ -67,17 +67,7 @@
                         <li class="submenu-item ">
                             <a href="{{ route('tagihan.index') }}">Tagihan</a>
                         </li>
-                        <li class="submenu-item ">
-                            <a href="component-badge.html">Pembayaran</a>
-                        </li>
                     </ul>
-                </li>
-
-                <li class="sidebar-item {{ Request::is('pendapatan.*') ? 'active' : '' }}">
-                    <a href="/pendapatan" class='sidebar-link'>
-                        <i class="bi bi-grid-fill"></i>
-                        <span>Pendapatan</span>
-                    </a>
                 </li>
 
                 @if (auth()->user()->hasrole('admin'))

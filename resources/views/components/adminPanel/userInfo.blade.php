@@ -16,7 +16,7 @@
             <h4>Info</h4>
         </div>
 
-        @props(['device' => null, 'platform' => null, 'browser' => null])
+        @props(['deviceinfo' => []])
 
         <div class="card-content pb-4">
             <div class="recent-message d-flex px-4 py-3">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="name ms-4">
                     <h5 class="mb-1">Device</h5>
-                    <h6 class="text-muted mb-0"> {{ $device ?? '-' }} </h6>
+                    <h6 class="text-muted mb-0"> {{ $deviceinfo['device'] ?? '-' }} </h6>
                 </div>
             </div>
             <div class="recent-message d-flex px-4 py-3">
@@ -34,7 +34,7 @@
                 </div>
                 <div class="name ms-4">
                     <h5 class="mb-1">OS</h5>
-                    <h6 class="text-muted mb-0"> {{ $platform ?? '-' }} </h6>
+                    <h6 class="text-muted mb-0"> {{ $deviceinfo['platform'] ?? '-' }} </h6>
                 </div>
             </div>
             <div class="recent-message d-flex px-4 py-3">
@@ -43,7 +43,7 @@
                 </div>
                 <div class="name ms-4">
                     <h5 class="mb-1">Browser</h5>
-                    <h6 class="text-muted mb-0"> {{ $browser ?? '-' }} </h6>
+                    <h6 class="text-muted mb-0"> {{ $deviceinfo['browser'] ?? '-' }} </h6>
                 </div>
             </div>
         </div>

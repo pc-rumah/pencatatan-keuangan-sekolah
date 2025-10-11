@@ -20,6 +20,7 @@
                                 <th>Siswa</th>
                                 <th>Nominal</th>
                                 <th>Status</th>
+                                <th>Metode</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -35,7 +36,16 @@
                                     @else
                                         <td><span class="badge bg-warning">Belum Lunas</span></td>
                                     @endif
+                                    <td>{{ $item->metode_pembayaran }}</td>
                                     <td class="d-flex">
+                                        <form action="{{ route('tagihan.status', $item->id) }}" method="post">
+                                            @csrf
+                                            @method('put')
+                                            <button
+                                                class="btn btn-sm {{ $item->status === 'lunas' ? 'btn-success' : 'btn-warning' }} me-2"
+                                                type="submit">Ubah
+                                                Status</button>
+                                        </form>
                                         <button class="btn btn-sm btn-success me-2" data-bs-toggle="modal"
                                             data-bs-target="#editKelasModal{{ $item->id }}"><i
                                                 class="fas fa-edit"></i>Edit</button>

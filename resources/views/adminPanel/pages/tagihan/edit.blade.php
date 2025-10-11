@@ -8,7 +8,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('tagihan.update', $item->id) }}" method="POST" data-parsley-validate>
+                <form action="{{ route('tagihan.update', $item->id) }}" method="POST" enctype="multipart/form-data"
+                    data-parsley-validate>
                     @csrf
                     @method('PUT')
                     <div class="form-group row">
@@ -35,6 +36,30 @@
                                         {{ $namaSiswa->name }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="bukti_pembayaran" class="col-form-label col-sm-2">Bukti Pembayaran</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="bukti_pembayaran" id="bukti_pembayaran" class="form-control"
+                                data-parsley-required="true" data-parsley-required-message="Bidang ini wajib di isi!">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="tanggal_lahir" class="col-form-label col-sm-2">Metode Pembayaran</label>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="metode_pembayaran" id="tunai"
+                                    value="tunai" @checked(old('metode_pembayaran', $item->metode_pembayaran) == 'tunai') required>
+                                <label class="form-check-label" for="tunai">Tunai</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="metode_pembayaran" id="transfer"
+                                    value="transfer" @checked(old('metode_pembayaran', $item->metode_pembayaran) == 'transfer') required>
+                                <label class="form-check-label" for="transfer">Transfer</label>
+                            </div>
                         </div>
                     </div>
 

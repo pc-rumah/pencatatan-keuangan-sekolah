@@ -3,6 +3,8 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PendapatanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\SiswaController;
@@ -28,6 +30,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('siswa', SiswaController::class);
     Route::resource('jenis', JenisController::class)->parameters(['jenis' => 'jenis']);
     Route::resource('tagihan', TagihanController::class);
+    Route::put('tagihan/{tagihan}/status', [TagihanController::class, 'updateStatus'])->name('tagihan.status');
 
     Route::post('/semester/{semester}/aktif', [SemesterController::class, 'aktif'])->name('semester.aktif');
     Route::post('/semester/{semester}/nonaktif', [SemesterController::class, 'nonaktif'])->name('semester.nonaktif');
